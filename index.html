@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saket's qoute genrator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; 
+            min-height: 100vh;
+        }
+        .quote-card {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+
+   
+    <div class="quote-card bg-white p-8 md:p-10 rounded-2xl w-full max-w-xl text-center">
+        
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-8">Thought for the Day</h1>
+        
+       
+        <div class="min-h-[140px] flex flex-col justify-center mb-8 p-6 border-l-8 border-indigo-500 bg-indigo-50 rounded-lg">
+            <p id="quote" class="text-xl italic text-gray-700 leading-relaxed">
+                "It's not what happens to you, but how you react to it that matters."
+            </p>
+            <p id="author" class="text-sm text-indigo-700 mt-4 font-bold">
+                — Epictetus
+            </p>
+        </div>
+
+       
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            <button id="next-btn" class="btn-primary flex-1 bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                Next Idea
+            </button>
+
+            <button id="share-btn" class="flex-1 bg-sky-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                Tweet It
+            </button>
+        </div>
+    </div>
+
+    
+    <footer class="mt-8 text-gray-500 text-xs">
+        <p>Built by Saket  | Simple JS Portfolio Project</p>
+    </footer>
+
+     
+    <script>
+         
+        const data = [
+            { text: "Simplicity is the ultimate sophistication.", source: "Leonardo da Vinci" },
+            { text: "The mind is everything. What you think you become.", source: "Buddha" },
+            { text: "The purpose of our lives is to be happy.", source: "Dalai Lama" },
+            { text: "Get busy living or get busy dying.", source: "Stephen King" },
+            { text: "Your time is limited, so don't waste it living someone else's life.", source: "Steve Jobs" },
+            { text: "Strive not to be a success, but rather to be of value.", source: "Albert Einstein" },
+            { text: "The journey of a thousand miles begins with a single step.", source: "Lao Tzu" }
+        ];
+
+         
+        const quoteEl = document.getElementById('quote');
+        const authorEl = document.getElementById('author');
+        const nextBtn = document.getElementById('next-btn');
+        const shareBtn = document.getElementById('share-btn');
+
+        
+        function updateQuote() {
+            
+            const index = Math.floor(Math.random() * data.length);
+            const current = data[index];
+
+             
+            quoteEl.textContent = `"${current.text}"`;
+            authorEl.textContent = `— ${current.source}`;
+        }
+
+         
+        nextBtn.addEventListener('click', updateQuote);
+
+        shareBtn.addEventListener('click', () => {
+            
+            const quoteText = quoteEl.textContent;
+            const authorText = authorEl.textContent;
+            
+             
+            const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(quoteText + ' ' + authorText + ' #CodeQuote')}`;
+            window.open(twitterLink, '_blank');
+        });
+
+         
+    </script>
+</body>
+</html>
